@@ -61,6 +61,7 @@ export class CurrencyCreateComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(this.data,'edit modal')
     this.initForm();
     this.setFormValues();
     this.currencyForm.valueChanges.subscribe(formValue => {
@@ -82,7 +83,7 @@ export class CurrencyCreateComponent implements OnInit {
 
   initForm() {
     this._startForm();
-    this._verifiedFieldsForm();
+   
     this._verifiedform();
   }
   _startForm() {
@@ -97,9 +98,7 @@ export class CurrencyCreateComponent implements OnInit {
       decimalSeparator: [null, [Validators.required]],
     });
   }
-  _verifiedFieldsForm() {
-
-  }
+ 
   _verifiedform() {
     const formularioFormGroup = this.currencyForm;
     const subscriber = formularioFormGroup
@@ -148,12 +147,21 @@ export class CurrencyCreateComponent implements OnInit {
   }
 
   setFormValues() {
+    console.log('SET VALUES',this.currency)
     if (this.currency) {
       let currency: any = { ...this.currency.format }
       //currency['country'] = this.findCountry();
       currency['languageIsoCode'] = this.currency.languageIsoCode;
       this.currencyForm.setValue(currency);
       this.currencyPreview = {...this.currency}
+    }else{
+      if(this.data){
+        let currency: CurrencyFormat = { ...this.data.currency.format }
+      //currency['country'] = this.findCountry();
+      currency['languageIsoCode'] = this.data.currency.languageIsoCode;
+      this.currencyForm.setValue(currency);
+      this.currencyPreview = {...this.data.currency}
+      }
     }
   }
 
@@ -192,18 +200,24 @@ export class CurrencyCreateComponent implements OnInit {
 saveCurrency() {
     /* this._loadService.enableLoad(); */
     if (this.data.currency) {
-       /*  this._currencyService
-            .updateCurrency(this.createEditCurrency)
+      this.currency = this.data.currency;
+    let formValue = this.currencyForm.value;
+    this.currency.countryCode = formValue.country.iso3;
+    this.currency.format = formValue;
+    this.currency.currencyCode = formValue.country.currency;
+    this.currency.languageIsoCode = formValue.country.iso2;
+        this._currencyService
+            .updateCurrency(this.currency)
             .subscribe(
                 async r => {
-                    this._loadService.disableLoad();
-                    this.dialogo.close(this.createEditCurrency);
+                    /* this._loadService.disableLoad(); */
+                    this._dialog.close(this.createEditCurrency);
                 },
                 err => {
-                    this._loadService.disableLoad();
+                   /*  this._loadService.disableLoad(); */
                     console.error(err);
                 },
-            ); */
+            );
     } else {
         console.log(this.currencyForm.value.useCode, 'FORM')
         this.currency = {

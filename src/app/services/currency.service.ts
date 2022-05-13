@@ -28,10 +28,11 @@ export class CurrencyApiService {
     createCurrency(currency:Currency){
         const url = this.apiUrl + 'currency-format/';
         const record = JSON.stringify(currency);
-        console.log(record,'RECORDSAVE')
+        
         return this.http.post(url, record,this.httpOption);
     }
     updateCurrency(currency: Currency ){
+        console.log(currency,'UPDATE')
         const url = this.apiUrl + `currency-format/`+currency._id;
         return this.http.put(url, currency, this.httpOption);
     }

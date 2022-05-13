@@ -65,6 +65,7 @@ export class CurrencyComponent implements OnInit {
   }
 
   openDialogEditCreate(currencySelect?: Currency):void {
+      console.log('EDIT',currencySelect)
         const dialogRef = this._dialog.open(
             CurrencyCreateComponent,
             {
