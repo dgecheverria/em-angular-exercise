@@ -1,4 +1,5 @@
 <div id="currencies">
+    <h1 class="title-page">EM Angular Front-end Exercise</h1>
     <toaster-container></toaster-container>
     <div class="action-bar">
         <h1>Manage Currencies</h1>
@@ -12,30 +13,31 @@
     </div>
     
     <div *ngIf="!isLoading">
-      <table  *ngIf="currencies.length > 0 " class="table table-sm  table-striped mt-5 table-bordered rounded">
-        <thead class="thead-dark">
+      <table  *ngIf="currencies.length > 0 " class="table mt-5 fixed_headers">
+        <thead >
         <tr>
-            <th scope="col">
+            <th class="format" scope="col">
+                <div class="currency">
+                    <h4>
+                       Currency Format
+                    </h4>
+                </div>
+            </th>
+            <th class="code" scope="col">
                 <div class="currency">
                     <h4>
                         Country Code
                     </h4>
                 </div>
             </th>
-            <th scope="col">
+            <th class="code" scope="col">
                 <div class="currency">
                     <h4>
                         Currency Code
                     </h4>
                 </div>
             </th>
-            <th scope="col">
-                <div class="currency">
-                    <h4>
-                       Format
-                    </h4>
-                </div>
-            </th>
+            
             <th scope="col">
                 <div class="currency">
                     <h4>
@@ -54,19 +56,19 @@
         </thead>
         <tbody>
         <tr *ngFor="let data of currencies">
-            <td>
+            <td class="format"> <currency-format [currency]="data"> </currency-format></td>
+            <td class="code">
                 <div class="currency">
                     <h3>{{data.countryCode}}</h3>
                 </div>
             </td>
-            <td>
+            <td class="code">
                 <div class="currency">
                     <h3>
                         {{data.currencyCode}}
                     </h3>
                 </div>
                 </td>
-            <td> <currency-format [currency]="data"> </currency-format></td>
             <td>
                 <div class="div currency">
                     <h3>
@@ -79,7 +81,7 @@
                     <a (click)="openDialogEditCreate(data)" class="btn  btn-outline-success btn-icon btn-success">
                         <i class="far fa-edit"></i>
                     </a>
-                    <a (click)="openDialogEditCreate(data)" class="btn  btn-outline-danger btn-icon btn-success">
+                    <a (click)="deleteCurrency(data)" class="btn  btn-outline-danger btn-icon btn-success">
                         <i class="far fa-trash-alt"></i>
                     </a>
                    <!--  <button (click)="openDialogEditCreate(data)"  class="fas fa-edit fa-2x text-success p-2"></button> -->

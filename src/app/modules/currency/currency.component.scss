@@ -4,6 +4,13 @@
 
 #currencies {
   
+  margin: 1.5em;
+
+  .title-page{
+    text-align: center;
+    padding: 1em;
+  }
+
   .currency {
     margin: 1em;
     padding: 0.2em;
@@ -12,6 +19,7 @@
   .action-bar{
     display: flex;
    justify-content: space-between;
+   padding: 1em 11em;
     button{
       max-width: 15em;
     }
@@ -24,3 +32,40 @@
   }
 
 }
+
+
+.fixed_headers {
+  width: calc(100% - 20%);
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: auto;
+  
+  th, td {
+    padding: 5px;
+    text-align: left;
+    min-width: 20em;
+    border-bottom: 0;
+  }
+  
+
+
+  thead {
+    background-color:  #333;
+    color: #FDFDFD;
+    tr {
+      display: block;
+      position: relative;
+    }
+  }
+  tbody {
+    display: block;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    height: calc(100vh - 25em);
+    tr:nth-child(even) {
+      background-color: #DDD;
+    }
+  }
+}
+

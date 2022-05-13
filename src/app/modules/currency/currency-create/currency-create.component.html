@@ -8,9 +8,6 @@
 
 <div mat-dialog-content>
     <div class="row contenido-modal">
-        <!-- <div class="col-md-12">
-            <p class="descripcion-modal">Ingrese los campos para  una currency:</p>
-        </div> -->
         <div class="col-sm-12">
             <form class="currency-form" [formGroup]="currencyForm">
 
@@ -18,7 +15,8 @@
                     <div class="col-md-12">
                         <mat-form-field appearance="outline">
                             <mat-label>Country</mat-label>
-                            <mat-select #select formControlName="country">
+                            <mat-select #select formControlName="country" > 
+                               
                                 <mat-select-filter [placeholder]="'Filter'" [displayMember]="'name'"
                                                    *ngIf="select.focused" [array]="countries" (filteredReturn)="filteredCountries = $event">
                                 </mat-select-filter>
