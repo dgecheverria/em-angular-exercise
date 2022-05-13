@@ -1,0 +1,13 @@
+.currency-form{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+    max-width: 33em;
+
+    .format-preview{
+        position: relative;
+        text-align: center;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

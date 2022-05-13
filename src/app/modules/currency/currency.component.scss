@@ -8,5 +8,19 @@
     margin: 1em;
     padding: 0.2em;
   }
+  
+  .action-bar{
+    display: flex;
+   justify-content: space-between;
+    button{
+      max-width: 15em;
+    }
+  }
+
+  .action-button{
+    > a{
+      margin-right: 1em;
+    }
+  }
 
 }

@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h3 mat-dialog-title>
+            <span class="bold">{{data.currency ? 'Edit' : 'Create'}} currency</span>
+        </h3>
+    </div>
+</div>
+
+<div mat-dialog-content>
+    <div class="row contenido-modal">
+        <!-- <div class="col-md-12">
+            <p class="descripcion-modal">Ingrese los campos para  una currency:</p>
+        </div> -->
+        <div class="col-sm-12">
+            <form class="currency-form" [formGroup]="currencyForm">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Country</mat-label>
+                            <mat-select #select formControlName="country">
+                                <mat-select-filter [placeholder]="'Filter'" [displayMember]="'name'"
+                                                   *ngIf="select.focused" [array]="countries" (filteredReturn)="filteredCountries = $event">
+                                </mat-select-filter>
+                                <mat-option *ngFor="let item of filteredCountries" [value]="item">{{item.name + ' - ' +
+                                item.currency}}</mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="currencyForm.controls['country'].errors">
+                                Your selection is invalid
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Currency position</mat-label>
+                            <mat-select #selectPosition formControlName="currencyPosition">
+                                <mat-select-filter [placeholder]="'Filter'" [displayMember]="'value'"
+                                                   *ngIf="selectPosition.focused" [array]="POSITIONS"
+                                                   (filteredReturn)="filteredPositions = $event"></mat-select-filter>
+                                <mat-option *ngFor="let item of filteredPositions" [value]="item.value">{{item.value}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="currencyForm.controls['currencyPosition'].errors">
+                                Your selection is invalid
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Thousand identifier</mat-label>
+                            <mat-select #selectThousandIdentifier formControlName="thousandIdentifier"
+                                        (selectionChange)="changeThousandIdentifier($event)">
+                                <mat-select-filter [placeholder]="'Filter'" [displayMember]="'value'"
+                                                   *ngIf="selectThousandIdentifier.focused" [array]="SEPARATORS"
+                                                   (filteredReturn)="filteredSeparators = $event"></mat-select-filter>
+                                <mat-option *ngFor="let item of filteredSeparators" [value]="item.value">{{item.text}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="currencyForm.controls['thousandIdentifier'].errors">
+                                {{errorSeparators}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-12">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Decimal separator</mat-label>
+                            <mat-select #selectThousandIdentifier formControlName="decimalSeparator"
+                                        (selectionChange)="changeDecimalSeparator($event)">
+                                <mat-select-filter [placeholder]="'Filter'" [displayMember]="'value'"
+                                                   *ngIf="selectThousandIdentifier.focused" [array]="SEPARATORS"
+                                                   (filteredReturn)="filteredSeparators = $event"></mat-select-filter>
+                                <mat-option *ngFor="let item of filteredSeparators" [value]="item.value">{{item.text}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="currencyForm.controls['decimalSeparator'].errors">
+                                {{errorSeparators}}
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+    
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Cents</mat-label>
+                            <input matInput placeholder="0" formControlName="cents" required type="number" autocomplete="off">
+                            <mat-error *ngIf="currencyForm.controls['cents'].errors">
+                                Your entered value is invalid
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <mat-checkbox class="example-margin" color="primary" formControlName="useCode" labelPosition="after">
+                    Show currency code
+                </mat-checkbox>
+                
+                <div class="format-preview">
+                    <h4>Preview:</h4>
+                    <price-preview size="big" [format]="currencyPreview"></price-preview>
+                </div>
+                
+    
+            </form>
+        </div>
+    </div>
+</div>
+
+<mat-dialog-actions class="justify-content-end">
+    <div class="d-flex flex-row-reverse">
+        <div class="p-2">
+            <button class="btn btn-primary" (click)="saveCurrency()" [disabled]="!validForm">SAVE
+            </button>
+        </div>
+        <div class="p-2">
+            <button mat-dialog-close class="btn btn-outline-secondary">CANCEL</button>
+        </div>
+    </div>
+</mat-dialog-actions>
+

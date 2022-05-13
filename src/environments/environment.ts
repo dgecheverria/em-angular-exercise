@@ -5,9 +5,10 @@
 export const environment = {
   production: false,
   appVersion: 'v726demo1',
-  // USERDATA_KEY: 'authf649fc9a5f55',
+  API_KEY: '5620Aku2K01otZ0HRlvfFaGThvpgvwcg72XsdjSd',
   isMockEnabled: true,
   apiUrl: 'https://huentf367j.execute-api.us-east-1.amazonaws.com/test/',
+  apiUrlCountries: 'https://countriesnow.space/api/v0.1/countries/currency'
 };
 
 /*

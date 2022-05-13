@@ -1,7 +1,95 @@
 <div id="currencies">
-    <h1>Currencies</h1>
+    <toaster-container></toaster-container>
+    <div class="action-bar">
+        <h1>Manage Currencies</h1>
+        <button class="btn btn-outline-primary font-weight-bold mr-2"
+                (click)="openDialogEditCreate()">
+            <i class="fas fa-plus fa-2x"></i>
+            <span>
+                Add Currency
+            </span>
+        </button>
+    </div>
+    
     <div *ngIf="!isLoading">
-        <currency-format *ngFor="let currency of currencies" [currency]="currency"> </currency-format>
+      <table  *ngIf="currencies.length > 0 " class="table table-sm  table-striped mt-5 table-bordered rounded">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">
+                <div class="currency">
+                    <h4>
+                        Country Code
+                    </h4>
+                </div>
+            </th>
+            <th scope="col">
+                <div class="currency">
+                    <h4>
+                        Currency Code
+                    </h4>
+                </div>
+            </th>
+            <th scope="col">
+                <div class="currency">
+                    <h4>
+                       Format
+                    </h4>
+                </div>
+            </th>
+            <th scope="col">
+                <div class="currency">
+                    <h4>
+                        Creation Date
+                    </h4>
+                </div>
+            </th>
+            <th scope="col">
+                <div class="currency">
+                    <h4>
+                        Actions
+                    </h4>
+                </div>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of currencies">
+            <td>
+                <div class="currency">
+                    <h3>{{data.countryCode}}</h3>
+                </div>
+            </td>
+            <td>
+                <div class="currency">
+                    <h3>
+                        {{data.currencyCode}}
+                    </h3>
+                </div>
+                </td>
+            <td> <currency-format [currency]="data"> </currency-format></td>
+            <td>
+                <div class="div currency">
+                    <h3>
+                        {{data.createdAt | date:'mediumDate' }}
+                    </h3>
+                </div>
+            </td>
+            <td>
+                <div class="div currency action-button">
+                    <a (click)="openDialogEditCreate(data)" class="btn  btn-outline-success btn-icon btn-success">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a (click)="openDialogEditCreate(data)" class="btn  btn-outline-danger btn-icon btn-success">
+                        <i class="far fa-trash-alt"></i>
+                    </a>
+                   <!--  <button (click)="openDialogEditCreate(data)"  class="fas fa-edit fa-2x text-success p-2"></button> -->
+                    <!-- <button  class="fas fa-trash text-danger p-2 fa-2x"></button> -->
+                </div>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+      <h5 *ngIf="currencies.length == 0" style="text-align: start; margin-top: 10px;" >There are no currencies to display</h5>
     </div>
     <div *ngIf="isLoading">
         <svg class="splash-spinner" viewBox="0 0 50 50">
@@ -15,6 +103,6 @@
             ></circle>
           </svg>
     </div>
-    <button (click)="addCurrency()">Add Currency</button>
+    
 </div>
-  
+
